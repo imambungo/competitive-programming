@@ -18,7 +18,7 @@ Constraints:
 1 ≤ length(W) ≤ 100
 
 Sample Input:
-
+```
 3  
 3  
 4  
@@ -38,10 +38,12 @@ dog
 8  
 bananana  
 kalibrrr  
-nana  
+nana
+```
 
 Sample Output:
-
+```
 Case 1: 4  
 Case 2: 8  
 Case 3: 4
+```
