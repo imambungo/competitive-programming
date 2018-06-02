@@ -19,31 +19,31 @@ Constraints:
 
 Sample Input:
 ```
-3  
-3  
-4  
-catt  
-aata  
-tatc  
-cat  
-5  
-5  
-gogog  
-ooooo  
-godog  
-ooooo  
-gogog  
-dog  
-2  
-8  
-bananana  
-kalibrrr  
+3
+3
+4
+catt
+aata
+tatc
+cat
+5
+5
+gogog
+ooooo
+godog
+ooooo
+gogog
+dog
+2
+8
+bananana
+kalibrrr
 nana
 ```
 
 Sample Output:
 ```
-Case 1: 4  
-Case 2: 8  
+Case 1: 4
+Case 2: 8
 Case 3: 4
 ```
