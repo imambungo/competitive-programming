@@ -1,12 +1,19 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 class kingdommap{
     static String armiesInRegion = "";
+    static String sortStringByChar(String lastArmyStanding){
+        char[] tempArray = lastArmyStanding.toCharArray();
+        Arrays.sort(tempArray);
+        String sorted = new String(tempArray);
+        return sorted;
+    }
     static String ubahCharKe(String word, int k){
         String wordBaru = word.substring(0, k) + '#' + word.substring(k+1, word.length());
         return wordBaru;
     }
-    static boolean checkContested(String armiesInRegion){
+    static boolean checkContested(){
         if(armiesInRegion.length() == 0){
             return false;
         }
@@ -55,16 +62,20 @@ class kingdommap{
         }
         for (i = 0; i < T; i++) {
             int contested = 0;
+            String lastArmyStanding = "";
             System.out.println("Case "+(i+1)+":");
             for (j = 0; j < words[i].word.length; j++) {
                 for (k = 0; k < words[i].word[j].length(); k++) {
                     checkAt(words,i,j,k);
-                    if(cekContested(armiesInRegion)){
+                    if(cekContested()){
                         contested++;
+                    }else if(armiesInRegion.length() != 0){
+                        lastArmyStanding += armiesInRegion.charAt(0);
                     }
                     armiesInRegion = "";
                 }
             }
+            lastArmyStanding = sortStringByChar(lastArmyStanding);
             System.out.println("Contested "+contested);
         }
     }
