@@ -1,12 +1,15 @@
 import java.util.Scanner;
+import java.util.Arrays;
 class dummy {
-    static String ubahCharKe(String word, int k) {
-        String wordBaru = word.substring(0, k) + '#' + word.substring(k + 1, word.length());
-        return wordBaru;
+    static String sortStringByChar(String lastArmyStanding) {
+        char[] tempArray = lastArmyStanding.toCharArray();
+        Arrays.sort(tempArray);
+        String sorted = new String(tempArray);
+        return sorted;
     }
     public static void main(String[] args) {
-        String a = "jjjjjjjjjjjjjjj";
-        a = ubahCharKe(a, 3);
+        String a = "dcba";
+        a = sortStringByChar(a);
         System.out.println(a);
     }
 }

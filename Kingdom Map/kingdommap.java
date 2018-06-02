@@ -3,6 +3,19 @@ import java.util.Arrays;
 
 class kingdommap{
     static String armiesInRegion = "";
+    static void printArmies(String lastArmyStanding){
+        char patokan = lastArmyStanding.charAt(0);
+        int count = 0;
+        for (int i = 0; i < lastArmyStanding.length(); i++) {
+            if(lastArmyStanding.charAt(i) == patokan){
+                count++;
+            }else{
+                System.out.println(patokan+" "+count);
+                count = 0;
+                patokan = lastArmyStanding.charAt(i);
+            }
+        }
+    }
     static String sortStringByChar(String lastArmyStanding){
         char[] tempArray = lastArmyStanding.toCharArray();
         Arrays.sort(tempArray);
@@ -76,6 +89,9 @@ class kingdommap{
                 }
             }
             lastArmyStanding = sortStringByChar(lastArmyStanding);
+            if(lastArmyStanding.length() != 0){
+                printArmies(lastArmyStanding);
+            }
             System.out.println("Contested "+contested);
         }
     }
