@@ -113,7 +113,7 @@ class kingdommap{
             if(lastArmyStanding.length() != 0){
                 printArmies(lastArmyStanding);
             }
-            System.out.println("Contested "+contested);
+            System.out.println("contested "+contested);
         }
     }
 }
