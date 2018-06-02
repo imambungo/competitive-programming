@@ -11,8 +11,11 @@ class kingdommap{
                 count++;
             }else{
                 System.out.println(patokan+" "+count);
-                count = 0;
+                count = 1;
                 patokan = lastArmyStanding.charAt(i);
+            }
+            if(i == lastArmyStanding.length()-1){
+                System.out.println(patokan + " " + count);
             }
         }
     }
@@ -80,7 +83,7 @@ class kingdommap{
             for (j = 0; j < words[i].word.length; j++) {
                 for (k = 0; k < words[i].word[j].length(); k++) {
                     checkAt(words,i,j,k);
-                    if(cekContested()){
+                    if(checkContested()){
                         contested++;
                     }else if(armiesInRegion.length() != 0){
                         lastArmyStanding += armiesInRegion.charAt(0);
