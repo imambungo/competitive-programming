@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.io.File;
+
 class kingdommap{
     static String armiesInRegion = "";
     static void printArmies(String lastArmyStanding){
@@ -63,6 +68,19 @@ class kingdommap{
         // System.out.println(words[i].word[j].charAt(k));
     }
     public static void main(String[] args) {
+        // to avoid stack exchange:
+        // javac kingdommap.java
+        // java -Xss4m kingdommap
+
+        try {
+            File file = new File("output.txt"); // Your file
+            FileOutputStream fos = new FileOutputStream(file);
+            PrintStream ps = new PrintStream(fos);
+            System.setOut(ps);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         int T = sc.nextInt();
         int i,j,k;
