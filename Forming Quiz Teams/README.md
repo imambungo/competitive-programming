@@ -1,0 +1,53 @@
+###### <h1 align="center">Forming Quiz Teams</h1>
+<h4 align="center">UVa Online Judge [47] Problem Number 10911</h4>
+</br>
+You have been given the job of forming the quiz teams for the next ‘MCA CPCI Quiz Championship’.
+There are 2 ∗ N students interested to participate and you have to form N teams, each team consisting
+of two members. Since the members have to practice together, all the students want their members
+house as near as possible. Let x 1 be the distance between the houses of group 1, x 2 be the distance
+between the houses of group 2 and so on. You have to make sure the summation (x 1 +x 2 +x 3 +. . .+x n )
+is minimized.
+
+## Input:
+
+There will be many cases in the input file. Each case starts with an integer N (N ≤ 8). The next 2 ∗ N
+lines will given the information of the students. Each line starts with the students name, followed by
+the x coordinate and then the y coordinate. Both x, y are integers in the range 0 to 1000. Students
+name will consist of lowercase letters only and the length will be at most 20.
+Input is terminated by a case where N is equal to 0.
+
+## Output:
+
+For each case, output the case number followed by the summation of the distances, rounded to 2 decimal
+places. Follow the sample for exact format.
+
+Constraints:
+
+1 ≤ N ≤ 8  
+0 ≤ x, y ≤ 1000  
+
+### Sample Input:
+```
+5
+sohel 10 10
+mahmud 20 10
+sanny 5 5
+prince 1 1
+per 120 3
+mf 6 6
+kugel 50 60
+joey 3 24
+limon 6 9
+manzoor 0 0
+1
+derek 9 9
+jimmy 10 10
+0
+```
+### Sample Output:
+```
+Case 1: 118.40
+Case 2: 1.41
+```
+
+Problem link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1852
