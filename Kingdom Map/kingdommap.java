@@ -1,3 +1,8 @@
+// to avoid stack overflow:
+//   javac kingdommap.java
+//   java -Xss4m kingdommap
+// for linux user, to copy content of input.in, run:  xclip -sel clip < input.in
+
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -6,13 +11,10 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.File;
 
-class kingdommap{
-	public static void main(String[] args) {
-        // to avoid stack overflow:
-        // javac kingdommap.java
-        // java -Xss4m kingdommap
-		// for linux user, to copy content of input.in, run:    xclip -sel clip < input.in
-
+class kingdommap
+{
+	public static void main(String[] args)
+	{
 		// Untuk ngeprint output ke file output.txt
 		/////////////////////////////////////////////////////////
         try {                                                  //
@@ -48,11 +50,13 @@ class kingdommap{
 
             for (j = 0; j < N; j++)
 			{
-				// Nerima String baris ke-j dari map testCase ke-j
+				// Nerima String baris ke-j untuk map testCase ke-j
                 arrayOfMap[i].baris[j] = sc.next();
             }
         }
-        for (i = 0; i < banyakTestCase; i++) {
+
+        for (i = 0; i < banyakTestCase; i++)
+		{
             int contested = 0;// Jumlah region di map i yg punya 2 atau lebih huruf yg berbeda
             String lastArmyStanding = "";
             System.out.println("Case "+(i+1)+":");
@@ -78,53 +82,6 @@ class kingdommap{
             }
             System.out.println("contested "+contested);
         }
-    }
-
-    static String armiesInRegion = "";
-
-    static void printArmies(String lastArmyStanding){
-        char patokan = lastArmyStanding.charAt(0);
-        int count = 0;
-        for (int i = 0; i < lastArmyStanding.length(); i++) {
-            if(lastArmyStanding.charAt(i) == patokan){
-                count++;
-            }else{
-                System.out.println(patokan+" "+count);
-                count = 1;
-                patokan = lastArmyStanding.charAt(i);
-            }
-            if(i == lastArmyStanding.length()-1){
-                System.out.println(patokan + " " + count);
-            }
-        }
-    }
-
-    static String sortStringByChar(String lastArmyStanding){
-        char[] tempArray = lastArmyStanding.toCharArray();
-        Arrays.sort(tempArray);
-        String sorted = new String(tempArray);
-        return sorted;
-    }
-
-	// Ini adalah fungsi untuk merubah karakter ke-k dari sebuah String menjadi '#'
-    static String ubahCharKe(String baris, int k){
-        String barisBaru = baris.substring(0, k) + '#' + baris.substring(k+1);
-		// Read about substring:	https://www.javatpoint.com/substring
-        return barisBaru;
-    }
-
-	// Cek apakah region di map punya 2 atau lebih huruf yg berbeda
-    static boolean checkContested(){
-        if(armiesInRegion.length() == 0){
-            return false;
-        }
-        char patokan = armiesInRegion.charAt(0);
-        for (int i = 1; i < armiesInRegion.length(); i++) {
-            if(armiesInRegion.charAt(i) != patokan){
-                return true;
-            }
-        }
-        return false;
     }
 
 	// Adalah method untuk mengecek karakter pada suatu koordinat (j,k) di map ke-i.
@@ -176,6 +133,66 @@ class kingdommap{
             }
         }
     }
+
+	// Semua huruf yang ditemukan oleh tim pencari dimasukkan kesini
+		// suatu huruf bisa muncul beberapa kali
+		// berurutan dari yang pertama ketemu sampai yang terakhir
+    static String armiesInRegion = "";
+
+	// Cek apakah region di map punya 2 atau lebih huruf yg berbeda
+    static boolean checkContested()
+	{
+		// Jika tidak ada huruf yang terdata di armiesInRegion
+        if(armiesInRegion.length() == 0){
+            return false;
+        }
+
+        char patokan = armiesInRegion.charAt(0);
+        for (int i = 1; i < armiesInRegion.length(); i++)
+		{
+			// Jika huruf ke-2 dan seterusnya ada yg berbeda dari huruf pertama
+            if(armiesInRegion.charAt(i) != patokan){
+                return true;
+            }
+        }
+
+		// Kalo sampe sini, berarti cuma ada 1 huruf
+        return false;
+    }
+
+
+    static void printArmies(String lastArmyStanding){
+        char patokan = lastArmyStanding.charAt(0);
+        int count = 0;
+        for (int i = 0; i < lastArmyStanding.length(); i++) {
+            if(lastArmyStanding.charAt(i) == patokan){
+                count++;
+            }else{
+                System.out.println(patokan+" "+count);
+                count = 1;
+                patokan = lastArmyStanding.charAt(i);
+            }
+            if(i == lastArmyStanding.length()-1){
+                System.out.println(patokan + " " + count);
+            }
+        }
+    }
+
+    static String sortStringByChar(String lastArmyStanding){
+        char[] tempArray = lastArmyStanding.toCharArray();
+        Arrays.sort(tempArray);
+        String sorted = new String(tempArray);
+        return sorted;
+    }
+
+	// Ini adalah fungsi untuk merubah karakter ke-k dari sebuah String menjadi '#'
+    static String ubahCharKe(String baris, int k){
+        String barisBaru = baris.substring(0, k) + '#' + baris.substring(k+1);
+		// Read about substring:	https://www.javatpoint.com/substring
+        return barisBaru;
+    }
+
+
 }
 
 class Map {
