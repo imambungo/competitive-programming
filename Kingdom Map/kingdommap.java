@@ -26,15 +26,26 @@ class kingdommap{
 
         Scanner sc = new Scanner(System.in);
         int banyakTestCase = sc.nextInt();
+
+		// test case ke-i, baris ke-j, kolom ke-k
         int i, j, k;
 
+		// Bikin array of Map
+			// Analogi:  int[] arrayOfInteger = new int[banyakElemen]
+        Map[] arrayOfMap = new Map[banyakTestCase];
 
-        Map[] arrayOfMap = new Map[banyakTestCase];// Bikin array of Map
-        for (i = 0; i < banyakTestCase; i++) {
+        for (i = 0; i < banyakTestCase; i++)
+		{
             int N = sc.nextInt();
             int M = sc.nextInt();
+
+			// Kita sudah bikin arrayOfMap, tapi tiap elemennya belum diinstansiasi
+				// elemen yang belum diinstansiasi akan bernilai null
+				// Analogi:  arrayOfInteger[i] = value;
             arrayOfMap[i] = new Map();
-            arrayOfMap[i].baris = new String[N];
+
+            arrayOfMap[i].baris = new String[N];// Map ke-i memiliki N baris
+
             for (j = 0; j < N; j++)
 			{
 				// Nerima String baris ke-j dari map testCase ke-j
