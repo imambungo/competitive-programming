@@ -58,7 +58,11 @@ class kingdommap
         for (i = 0; i < banyakTestCase; i++)
 		{
             int contested = 0;// Jumlah region di map i yg punya 2 atau lebih huruf yg berbeda
-            String lastArmyStanding = "";
+
+			// List faction yg paling sedikit menguasai 1 region di map i
+				// Jika suatu huruf ada n buah, berarti huruf tersebut menguasai n region
+            String penguasaRegion = "";
+
             System.out.println("Case "+(i+1)+":");
 
 			// Looping sebanyak baris Map testCase ke-i
@@ -67,18 +71,28 @@ class kingdommap
 				// Looping sebanyak jumlah karakter dari baris ke-j Map ke-i
                 for (k = 0; k < arrayOfMap[i].baris[j].length(); k++)
 				{
+					// Kirim tim pencari ke semua titik di map (j,k)
+						// Seandainya titik tersebut bukan '#',
+						// maka itu adalah region baru yg belum di jelajahi
+						// lihat method kirimTimPencari() untuk memahaminya
                     kirimTimPencari(arrayOfMap, i, j, k);
                     if(checkContested()){
                         contested++;
                     }else if(armiesInRegion.length() != 0){
-                        lastArmyStanding += armiesInRegion.charAt(0);
+						// Kalau tidak contested dan di region itu tidak kosong,
+							// berarti cuma ada 1 faction, penguasa region tersebut.
+						// armiesInRegion.length() != 0 karena 1 faction bisa
+							// terdiri dari beberapa army.
+                        penguasaRegion += armiesInRegion.charAt(0);
                     }
+
+					// Reset daftar army, untuk diisi lagi saat menemukan region baru
                     armiesInRegion = "";
                 }
             }
-            lastArmyStanding = sortStringByChar(lastArmyStanding);
-            if(lastArmyStanding.length() != 0){
-                printArmies(lastArmyStanding);
+            penguasaRegion = sortStringByChar(penguasaRegion);
+            if(penguasaRegion.length() != 0){
+                printArmies(penguasaRegion);
             }
             System.out.println("contested "+contested);
         }
@@ -161,25 +175,25 @@ class kingdommap
     }
 
 
-    static void printArmies(String lastArmyStanding){
-        char patokan = lastArmyStanding.charAt(0);
+    static void printArmies(String penguasaRegion){
+        char patokan = penguasaRegion.charAt(0);
         int count = 0;
-        for (int i = 0; i < lastArmyStanding.length(); i++) {
-            if(lastArmyStanding.charAt(i) == patokan){
+        for (int i = 0; i < penguasaRegion.length(); i++) {
+            if(penguasaRegion.charAt(i) == patokan){
                 count++;
             }else{
                 System.out.println(patokan+" "+count);
                 count = 1;
-                patokan = lastArmyStanding.charAt(i);
+                patokan = penguasaRegion.charAt(i);
             }
-            if(i == lastArmyStanding.length()-1){
+            if(i == penguasaRegion.length()-1){
                 System.out.println(patokan + " " + count);
             }
         }
     }
 
-    static String sortStringByChar(String lastArmyStanding){
-        char[] tempArray = lastArmyStanding.toCharArray();
+    static String sortStringByChar(String penguasaRegion){
+        char[] tempArray = penguasaRegion.toCharArray();
         Arrays.sort(tempArray);
         String sorted = new String(tempArray);
         return sorted;
