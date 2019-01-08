@@ -76,22 +76,29 @@ class kingdommap
 						// maka itu adalah region baru yg belum di jelajahi
 						// lihat method kirimTimPencari() untuk memahaminya
                     kirimTimPencari(arrayOfMap, i, j, k);
+
                     if(checkContested()){
                         contested++;
                     }else if(armiesInRegion.length() != 0){
 						// Kalau tidak contested dan di region itu tidak kosong,
 							// berarti cuma ada 1 faction, penguasa region tersebut.
-						// armiesInRegion.length() != 0 karena 1 faction bisa
-							// terdiri dari beberapa army.
+						// armiesInRegion.length() != 0 bukan armiesInRegion.length() == 1
+							// karena 1 faction bisa terdiri dari beberapa army.
                         penguasaRegion += armiesInRegion.charAt(0);
                     }
 
-					// Reset daftar army, untuk diisi lagi saat menemukan region baru
+					// Reset daftar army, untuk diisi lagi oleh kirimTimPencari()
+						// saat menemukan region baru
+					// (sebenarnya ini agak sia2 karena armiesInRegion selalu
+						// direset walau sudah kosong)
                     armiesInRegion = "";
                 }
             }
+
+			// Urutkan penguasaRegion berdasarkan abjad
             penguasaRegion = sortStringByChar(penguasaRegion);
             if(penguasaRegion.length() != 0){
+				// Cetak daftar penguasa dan jumlah region yg mereka kuasai
                 printArmies(penguasaRegion);
             }
             System.out.println("contested "+contested);
@@ -175,24 +182,44 @@ class kingdommap
     }
 
 
-    static void printArmies(String penguasaRegion){
+    static void printArmies(String penguasaRegion)
+	{
+		// Patokan adalah penguasa yang mewakili factionnya
+			// Misal: penguasaRegion = "aabbbcccc", maka patokan
+			// adalah char ke-0, setelah itu berubah jadi char ke-2,
+			// lalu terakhir jadi char ke-5
         char patokan = penguasaRegion.charAt(0);
-        int count = 0;
-        for (int i = 0; i < penguasaRegion.length(); i++) {
+
+        int count = 0;// Jumlah region yg dikuasai faction si patokan
+
+        for (int i = 0; i < penguasaRegion.length(); i++)
+		{
             if(penguasaRegion.charAt(i) == patokan){
+				// Kalau huruf ke-i masih sama dengan patokan,
+					// tambah jumlah region yg dikuasai faction si patokan
                 count++;
             }else{
+				// Kalau sudah bukan faction yg sama dengan patokan,
+					// print patokan dan jumlah region yg dikuasai
                 System.out.println(patokan+" "+count);
-                count = 1;
+
+				// Patokan sudah berganti, penguasa region yg sudah dihitung
+					// baru 1 (patokan baru itu sendiri)
                 patokan = penguasaRegion.charAt(i);
+                count = 1;
             }
+
             if(i == penguasaRegion.length()-1){
+				// Kalau sudah diujung daftar penguasaRegion,
+					// print patokan terakhir dan jumlah region yg dikuasai
                 System.out.println(patokan + " " + count);
             }
         }
     }
 
-    static String sortStringByChar(String penguasaRegion){
+	// Urutkan String berdasarkan abjad
+    static String sortStringByChar(String penguasaRegion)
+	{
         char[] tempArray = penguasaRegion.toCharArray();
         Arrays.sort(tempArray);
         String sorted = new String(tempArray);
@@ -200,7 +227,8 @@ class kingdommap
     }
 
 	// Ini adalah fungsi untuk merubah karakter ke-k dari sebuah String menjadi '#'
-    static String ubahCharKe(String baris, int k){
+    static String ubahCharKe(String baris, int k)
+	{
         String barisBaru = baris.substring(0, k) + '#' + baris.substring(k+1);
 		// Read about substring:	https://www.javatpoint.com/substring
         return barisBaru;
