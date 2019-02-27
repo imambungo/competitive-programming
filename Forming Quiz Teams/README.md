@@ -51,3 +51,5 @@ Case 2: 1.41
 ```
 
 Problem link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1852
+
+IMPORTANT! before submitting, [change the class name into Main](https://uva.onlinejudge.org/index.php?id=15&Itemid=30&option=com_content&task=view)
